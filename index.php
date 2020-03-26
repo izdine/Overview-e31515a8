@@ -5,8 +5,9 @@
     <title>Netland!</title>
 </head>
 <body>
-    <?php
-function select($quary){
+<?php
+function select($quary)
+{
 $host = 'localhost';
 $db   = 'netland';
 $user = 'root';
@@ -16,8 +17,7 @@ $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 $options = [
 PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-PDO::ATTR_EMULATE_PREPARES   => false,
-];
+PDO::ATTR_EMULATE_PREPARES   => false,];
 try{
 $pdo = new PDO($dsn, $user, $pass, $options);
 }catch (\PDOException $e) {
@@ -29,50 +29,48 @@ $rowResult = array();
 foreach ($row as $collum => $value) {
 $rowResult[$collum] = $value;}
 $formatResult[] = $rowResult;}
-return $formatResult;}
-            ?>
-    <h1>Welkom op het Netland beheerders paneel</h1>
-    <h3>Series</h3>
-    <table>
-        <thead>
-            <th>Titel</th>
-            <th>Rating</th>
-            <th></th>
-        </thead>
-        <tbody>
-            <?php
-                $rows = select('SELECT * FROM series');
-                foreach ($rows as $row) {
-                    echo <<<EOT
-                        <tr>
-                            <td>${row['title']}</td>
-                            <td>${row['rating']}</td>
-                            <td><a href="serie.php?id=${row['id']}">Meer info</a></td>
-                        </tr>
-                    EOT;}
-            ?>
-        </tbody>
-    </table>
-    <h3>Films</h3>
-    <table>
-        <thead>
-            <th>Titel</th>
-            <th>Duur</th>
-            <th></th>
-        </thead>
-        <tbody>
-            <?php
-            $rows = select('SELECT * FROM films');
-            foreach ($rows as $row) {
-                echo <<<EOT
-                            <tr>
-                                <td>${row['Title']}</td>
-                                <td>${row['Duur']}</td>
-                                <td><a href="film.php?id=${row['ID']}">Meer info</a></td>
-                            </tr>
-                        EOT;}
-            ?>
-        </tbody>
-    </table>
+return $formatResult;}?>
+<h1>Welkom op het Netland beheerders paneel</h1>
+<h3>Series</h3>
+<table>
+<thead>
+<th>Titel</th>
+<th>Rating</th>
+<th></th>
+</thead>
+<tbody>
+<?php
+$rows = select('SELECT * FROM series');
+foreach ($rows as $row) {
+echo <<<EOT
+<tr>
+<td>${row['title']}</td>
+<td>${row['rating']}</td>
+<td><a href="serie.php?id=${row['id']}">Meer info</a></td>
+</tr>
+EOT;}?>
+</tbody>
+</table>
+<h3>Films</h3>
+<table>
+<thead>
+<th>Titel</th>
+<th>Duur</th>
+<th></th>
+</thead>
+<tbody>
+<?php
+$rows = select('SELECT * FROM films');
+foreach ($rows as $row) {
+echo <<<EOT
+<tr>
+<td>${row['Title']}</td>
+<td>${row['Duur']}</td>
+<td><a href="film.php?id=${row['ID']}">Meer info</a></td>
+</tr>
+EOT;}
+?>
+</tbody>
+</table>
 </body>
 </html>
