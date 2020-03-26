@@ -6,46 +6,33 @@
 </head>
 <body>
     <?php
-        function select($quary){
-          $host = 'localhost';
-          $db   = 'netland';
-          $user = 'root';
-          $pass = '';
-          $charset = 'utf8mb4';
-
-            $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-            $options = [
-                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                PDO::ATTR_EMULATE_PREPARES   => false,
-            ];
-
-            try {
-                $pdo = new PDO($dsn, $user, $pass, $options);
-            } catch (\PDOException $e) {
-                throw new \PDOException($e->getMessage(), (int)$e->getCode());
-            }
-
-            $formatResult = array();
-
-            $rawResult = $pdo->query($quary);
-            while ($row = $rawResult->fetch()) {
-                $rowResult = array();
-
-                foreach ($row as $collum => $value) {
-                    $rowResult[$collum] = $value;
-                }
-
-                $formatResult[] = $rowResult;
-            }
-
-            return $formatResult;
-        }
-    ?>
+function select($quary){
+$host = 'localhost';
+$db   = 'netland';
+$user = 'root';
+$pass = '';
+$charset = 'utf8mb4';
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$options = [
+PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+PDO::ATTR_EMULATE_PREPARES   => false,
+];
+try{
+$pdo = new PDO($dsn, $user, $pass, $options);
+}catch (\PDOException $e) {
+throw new \PDOException($e->getMessage(), (int)$e->getCode());}
+$formatResult = array();
+$rawResult = $pdo->query($quary);
+while ($row = $rawResult->fetch()) {
+$rowResult = array();
+foreach ($row as $collum => $value) {
+$rowResult[$collum] = $value;}
+$formatResult[] = $rowResult;}
+return $formatResult;}
+            ?>
     <h1>Welkom op het Netland beheerders paneel</h1>
-
     <h3>Series</h3>
-
     <table>
         <thead>
             <th>Titel</th>
@@ -60,16 +47,13 @@
                         <tr>
                             <td>${row['title']}</td>
                             <td>${row['rating']}</td>
+                            <td><a href="serie.php?id=${row['id']}">Meer info</a></td>
                         </tr>
-                    EOT;
-                }
+                    EOT;}
             ?>
         </tbody>
     </table>
-
-
     <h3>Films</h3>
-
     <table>
         <thead>
             <th>Titel</th>
@@ -84,9 +68,9 @@
                             <tr>
                                 <td>${row['Title']}</td>
                                 <td>${row['Duur']}</td>
+                                <td><a href="film.php?id=${row['ID']}">Meer info</a></td>
                             </tr>
-                        EOT;
-            }
+                        EOT;}
             ?>
         </tbody>
     </table>
