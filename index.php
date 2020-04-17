@@ -9,10 +9,10 @@
 function select($quary)
 {
 $host = 'localhost';
-$db   = 'netland';
-$user = 'root';
-$pass = '';
-$charset = 'utf8mb4';
+$db   =   'netland';
+$user =      'root';
+$pass =          '';
+$charset  'utf8mb4';
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 $options = [
 PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -20,7 +20,8 @@ PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
 PDO::ATTR_EMULATE_PREPARES   => false,];
 try{
 $pdo = new PDO($dsn, $user, $pass, $options);
-}catch (\PDOException $e) {
+}
+catch (\PDOException $e) {
 throw new \PDOException($e->getMessage(), (int)$e->getCode());}
 $formatResult = array();
 $rawResult = $pdo->query($quary);
@@ -29,7 +30,7 @@ $rowResult = array();
 foreach ($row as $collum => $value) {
 $rowResult[$collum] = $value;}
 $formatResult[] = $rowResult;}
-return $formatResult;}?>
+        return $formatResult;}?>
 <h1>Welkom op het Netland beheerders paneel</h1>
 <h3>Series</h3>
 <table>
