@@ -66,10 +66,7 @@
             ?>
         </tbody>
     </table>
-
-
     <h3>Films</h3>
-
     <table>
         <thead>
             <th>Titel</th>
